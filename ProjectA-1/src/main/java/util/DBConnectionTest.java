@@ -4,8 +4,8 @@ import java.sql.*;
 
 public class DBConnectionTest {
     public static void main(String[] args) throws Exception {
-        // 스키마의 이름체크
-        String DB_URL = "jdbc:mysql://localhost:3306/pojecta?useUnicode=true&characterEncoding=utf8";
+
+    	String DB_URL = "jdbc:mysql://localhost:3306/pojecta?useUnicode=true&characterEncoding=utf8";
 
         // DB id,password 체크
         String DB_USER = "ByongE";

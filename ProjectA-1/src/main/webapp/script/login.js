@@ -1,12 +1,12 @@
 function formCheck_Login(frm) {
     let msg ='';
 
-    if(frm.id.value.length==0) {
+    if(frm.email.value.length==0) {
         setMessage('id를 입력해주세요.', frm.id);
         return false;
     }
 
-    if(frm.pwd.value.length==0) {
+    if(frm.password.value.length==0) {
         setMessage('password를 입력해주세요.', frm.pwd);
         return false;
     }
@@ -19,4 +19,18 @@ function setMessage_Login(msg, element){
     if(element) {
         element.select();
     }
+}
+
+function loginCheck() {
+	if (document.frm.email.value.length == 0) {
+		alert("아이디를 써주세요");
+		frm.email.focus();
+		return false;
+	}
+	if (document.frm.password.value == "") {
+		alert("암호는 반드시 입력해야 합니다.");
+		frm.password.focus();
+		return false;
+	}
+	return true;
 }

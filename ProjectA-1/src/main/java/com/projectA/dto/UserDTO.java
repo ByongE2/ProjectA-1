@@ -1,12 +1,14 @@
 package com.projectA.dto;
 
+import java.sql.Timestamp;
+
 /*`email` varchar(50) not NULL ,
 `password` varchar(50) DEFAULT NULL,
 `name` varchar(50) DEFAULT NULL,
 `address_d`varchar(200) DEFAULT NULL,
 `phone` varchar(20) DEFAULT NULL,
 `grade` varchar(20) default null,
-`member_since` date default null,
+`member_since` date default CURRENT_TIMESTAMP ,
 PRIMARY KEY (`email`)*/
 
 public class UserDTO {
@@ -17,7 +19,7 @@ public class UserDTO {
 	String address_d;
 	String phone;
 	String grade;
-	String member_since;
+	Timestamp member_since;
 	
 	
 	@Override
@@ -61,11 +63,12 @@ public class UserDTO {
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public String getMember_since() {
+	public Timestamp getMember_since() {
 		return member_since;
 	}
-	public void setMember_since(String member_since) {
+	public void setMember_since(Timestamp member_since) {
 		this.member_since = member_since;
 	}
+	
 	
 }

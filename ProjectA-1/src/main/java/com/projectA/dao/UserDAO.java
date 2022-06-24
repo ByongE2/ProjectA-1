@@ -2,28 +2,86 @@ package com.projectA.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
-import util.DatabaseUtil;
+import com.projectA.dto.UserDTO;
+
+import util.DBManager;
 
 public class UserDAO {
-	Connection conn = DatabaseUtil.getConnection();
-
-	public int join(String userID, String userPassword) {
-		String SQL = "INSERT INTO USER VALUES (?,?)";
-		try {
-			// 각각의 데이터를 실제로 넣어준다.
-			PreparedStatement pstmt = conn.prepareStatement(SQL);
-
-			// 쿼리문의 ?안에 각각의 데이터를 넣어준다.
-			pstmt.setString(1, userID);
-			pstmt.setString(2, userPassword);
-
-			// 명령어를 수행한 결과 반환, 반환값: insert가 된 데이터의 개수
-			return pstmt.executeUpdate();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1;
+	
+	private UserDAO() { }
+	
+	private static UserDAO instance = new UserDAO();
+	
+	public static UserDAO getInstance() {
+		return instance;
 	}
-}
+	
+	public int userCheck(String email, String password){
+		
+		int result = -1;
+		String sql = "select password from user where email=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString("password").equals(password) && rs.getString("password") != null) {
+					result = 1;   //일치
+				}else {
+					result=0;  //불일치
+				}
+			}else {   
+				result = -1; //회원 아님
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return result;
+	}//userCheck
+
+	public UserDTO selectUser(String email) {
+		
+		UserDTO uDto = null;
+		String sql = "select * from member where userid=?";
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				uDto = new UserDTO();
+				uDto.setEmail(rs.getString("email"));
+				uDto.setPassword(rs.getString("password"));
+				uDto.setName(rs.getString("name"));
+				uDto.setAddress_d(rs.getString("address_d"));
+				uDto.setPhone(rs.getString("phone"));
+				uDto.setGrade(rs.getString("grade"));
+				uDto.setMember_since(rs.getTimestamp("member_since"));
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return uDto;
+	}//getMember
+}//MemberDAO
