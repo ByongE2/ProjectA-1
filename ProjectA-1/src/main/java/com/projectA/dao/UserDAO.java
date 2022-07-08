@@ -54,7 +54,8 @@ public class UserDAO {
 	public UserDTO selectUser(String email) {
 		
 		UserDTO uDto = null;
-		String sql = "select * from member where userid=?";
+//		String sql = "select * from user where email=?";
+		String sql = "select email, password from user where email=?";
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -70,18 +71,17 @@ public class UserDAO {
 				uDto = new UserDTO();
 				uDto.setEmail(rs.getString("email"));
 				uDto.setPassword(rs.getString("password"));
-				uDto.setName(rs.getString("name"));
-				uDto.setAddress_d(rs.getString("address_d"));
-				uDto.setPhone(rs.getString("phone"));
-				uDto.setGrade(rs.getString("grade"));
-				uDto.setMember_since(rs.getTimestamp("member_since"));
+//				uDto.setName(rs.getString("name"));
+//				uDto.setAddress_d(rs.getString("address_d"));
+//				uDto.setPhone(rs.getString("phone"));
+//				uDto.setGrade(rs.getString("grade"));
+//				uDto.setMember_since(rs.getTimestamp("member_since"));
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			DBManager.close(conn, pstmt, rs);
 		}
 		return uDto;
-	}//getMember
+	}//selectUser
 }//MemberDAO

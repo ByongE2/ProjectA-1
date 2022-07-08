@@ -2,6 +2,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page import="java.net.URLDecoder"%>
 <%@ page session="false"%>
+
+
+
 <!-- 세션을 "생성"하지 않겠다. -->
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +15,7 @@
 <title>Login</title>
 <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" /> -->
 <link rel="stylesheet" href="/css/nav.css">
-<script type="text/javascript" src="script/login.js"></script>
+<script type="text/javascript" src="/script/login.js"></script>
 <style>
 * {
 	box-sizing: border-box;
@@ -100,5 +103,10 @@ input[type='text'], input[type='password'] {
 		</div>
 		${message}
 	</form>
+	
+	<c:import url="nav.jsp"></c:import>
+	
+	
+	
 </body>
 </html>

@@ -5,6 +5,8 @@
 <%@ page import="javax.sql.DataSource" %>
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="javax.naming.Context" %>
+<%@ page import="com.projectA.dao.UserDAO" %>
+<%@ page import="util.DBManager" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,10 +16,10 @@
 <body>
 	<h1>DB 연결</h1>
 <%
-	Context initContext = new InitialContext();
-	Context envContext  = (Context)initContext.lookup("java:/comp/env");
-	DataSource ds = (DataSource)envContext.lookup("jdbc/MysqlDB");
-	Connection conn = ds.getConnection();
+	UserDAO dao = UserDAO.getInstance();
+	Connection conn = DBManager.getConnection();
+
+	out.println("DB연결 성공");	
 %>
 <h1>DBCP 연결</h1>
 </body>

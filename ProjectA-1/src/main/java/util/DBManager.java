@@ -8,14 +8,14 @@ import java.sql.SQLException;
 
 public class DBManager {
 
-	private static String url = "jdbc:mysql://localhost:3306/myConnection";
+	private static String url = "jdbc:mysql://localhost:3306/pojecta?useUnicode=true&characterEncoding=utf8";
 	private static String uid = "ByongE";
 	private static String pwd = "1234";
 
 	public static Connection getConnection() {
 		Connection conn = null;
 		try {
-			Class.forName("com.mysql.jdbc.driver");
+			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(url, uid, pwd);
 			System.out.println("db연결성공");
 		} catch (Exception e) {
