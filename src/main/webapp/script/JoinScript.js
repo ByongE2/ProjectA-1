@@ -57,7 +57,7 @@ function joinform_check() {
 	   		alert("약관 동의를 체크하세요.");
 	   		document.join_form.agree.focus();
 	   		return false;
-	 } else{
+	 } else {
 	   		alert("회원가입성공.");
 			document.join_form.action = "BoardServlet?command=join_Member";
 			document.join_form.submit();
